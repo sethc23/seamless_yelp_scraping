@@ -87,18 +87,17 @@ class Scrape_Vendors:
                                                  'growl_notice'         :   True,
                                                  'debug'                :   True,}
         D.update(                               {'tmp_tbl'              :   'tmp_' + D['guid'] } )
-
         self.T                              =   To_Class(D)
+        all_imports                         =   locals().keys() + ['os_environ','py_path']
+        for k in all_imports:
+            if not ['D','self'].count(k):
+                self.T.update(                  {k                      :   eval(k) })
+
         self.SL                             =   Seamless(self)
         self.Yelp                           =   Yelp(self)
         self.Yelp_API                       =   Yelp_API(self)
         self.SF                             =   Scrape_Functions(self)
-        self.SV                             =   self
-
-        all_imports                         =   locals().keys()
-        for k in all_imports:
-            if not k=='D':
-                self.T.update(                  {k                      :   eval(k) })
+        # self.SV                             =   self
 
     def post_screenshot(self,br):
         fpath                           =   self.T.TMP_WEB_PAGE
@@ -122,8 +121,8 @@ class Seamless:
     def __init__(self,_parent):
         self.SV                         =   _parent
         self.T                          =   _parent.T
-        self.SL                         =   self
-        SV                              =   self
+        # self.SL                         =   self
+        # SV                              =   self
 
     # SEAMLESS FUNCTIONS
     #   seamless: [ base f(x) ]
@@ -1078,7 +1077,7 @@ class Yelp_API:
         from rauth                              import OAuth1Session
         from json                               import dumps            as j_dump
         self.T                              =   _parent.T
-        self.Yelp_API                       =   self
+        # self.Yelp_API                       =   self
         from services_settings                  import  YELP_CONSUMER_KEY,\
                                                         YELP_CONSUMER_SECRET,\
                                                         YELP_TOKEN,\
@@ -1090,7 +1089,8 @@ class Yelp_API:
 
         all_imports = locals().keys()
         for k in all_imports:
-            self.T.update(                      {k                      :   eval(k) })
+            if not self.T.has_key(k) and not ['self'].count(k):
+                self.T.update(                  {k                      :   eval(k) })
 
 
     def yelp_business_api(self,biz_id):
@@ -1156,7 +1156,7 @@ class Yelp:
     def __init__(self,_parent):
         self.SV                             =   _parent
         self.T                              =   _parent.T
-        self.Yelp                           =   self
+        # self.Yelp                           =   self
 
     # YELP FUNCTIONS
     #   yelp:     0 of 2
@@ -1883,15 +1883,15 @@ class Scrape_Functions:
     def __init__(self,_parent):
         self.SV                             =   _parent
         self.T                              =   _parent.T
-        self.SF                             =   self
+        # self.SF                             =   self
         self.T.py_path.append(                  '../')
         from HTML_API                           import getTagsByAttr,google,safe_url,getSoup
         all_imports                         =   locals().keys()
         for k in all_imports:
-            if not self.T.has_key(k):
+            if not self.T.has_key(k) and not ['self'].count(k):
                 self.T.update(                  {k                      :   eval(k) })
         from webpage_scrape                     import scraper
-        self.T.update(                          {'br'                   :   scraper('phantom').browser })
+        self.T.update(                          {'br'                   :   scraper('phantom',**{'dict':self.T}).browser })
 
     def consolidate_yelp_urls(self):
         df                              =   self.T.pd.read_sql('select url from yelp where url is not null',self.T.eng)
