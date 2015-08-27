@@ -25,7 +25,7 @@ of points generated over the target area.
 	primary objective of this function is to get urls 
     for each vendor page
 
-2. ###### Search Google with name of vendor using site:www.seamless.com to obtain link
+2. ###### Search Google with name of vendor using "site:www.seamless.com" to obtain link
 
     * `python scrape_vendors.py sl 2`
     * `python scrape_vendors.py sl prev_closed_v`
@@ -60,12 +60,13 @@ of points generated over the target area.
 
 	this function is much faster than above but there is a query limit
 
-2. ###### Use address in Yelp API; collect data
+2. ###### Use vendor ID in standardized url; collect additional data
 
 	* `python scrape_vendors.py y 2`
 	* `python scrape_vendors.py y v_pgs`
 
-	this function uniquely collects hours and all comments per vendor
+	this function uniquely collects vendor hours and 
+    all yelp comments per vendor
 
 
 
