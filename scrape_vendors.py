@@ -56,16 +56,16 @@ class Scrape_Vendors:
         import                                  pandas          as pd
         # from pandas.io.sql                import execute              as sql_cmd
         pd.set_option(                         'expand_frame_repr', False)
-        pd.set_option(                              'display.max_columns', None)
-        pd.set_option(                              'display.max_rows', 1000)
-        pd.set_option(                              'display.width', 180)
+        pd.set_option(                          'display.max_columns', None)
+        pd.set_option(                          'display.max_rows', 1000)
+        pd.set_option(                          'display.width', 180)
         np                                  =   pd.np
         np.set_printoptions(                    linewidth=200,threshold=np.nan)
         import                                  geopandas       as gd
         from sqlalchemy                         import create_engine
         from logging                            import getLogger
         from logging                            import INFO             as logging_info
-        getLogger(                                  'sqlalchemy.dialects.postgresql').setLevel(logging_info)
+        getLogger(                              'sqlalchemy.dialects.postgresql').setLevel(logging_info)
         eng                                 =   create_engine(r'postgresql://postgres:postgres@%s:%s/%s'
                                                           %(DB_HOST,DB_PORT,'routing'),
                                                           encoding='utf-8',
