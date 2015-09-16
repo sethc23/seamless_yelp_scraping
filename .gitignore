@@ -1,6 +1,1 @@
-services_settings.py
-HTML_API.pyc
-scrape_vendors.pyc
-services_settings.pyc
-handle_cookies.pyc
-webpage_scrape.pyc
+*.pyc
