@@ -1089,7 +1089,7 @@ class Yelp_API:
 
         all_imports = locals().keys()
         for k in all_imports:
-            if not self.T.has_key(k) and not ['self'].count(k):
+            if not self.T.__dict__.has_key(k) and not ['self'].count(k):
                 self.T.update(                  {k                      :   eval(k) })
 
 
@@ -1888,7 +1888,7 @@ class Scrape_Functions:
         from HTML_API                           import getTagsByAttr,google,safe_url,getSoup
         all_imports                         =   locals().keys()
         for k in all_imports:
-            if not self.T.has_key(k) and not ['self'].count(k):
+            if not self.T.__dict__.has_key(k) and not ['self'].count(k):
                 self.T.update(                  {k                      :   eval(k) })
         from webpage_scrape                     import scraper
         self.T.update(                          {'br'                   :   scraper('phantom',**{'dict':self.T}).browser })
